@@ -64,13 +64,13 @@ if __name__ == '__main__':
     print('Listening on {}'.format(addr))
     while True:
         client_sock, addr = listen_sock.accept()
-        q.queue.Queue()
+        q = queue.Queue()
         with lock:
             send_queues[client_sock.fileno()] = q
         recv_thread = threading.Thread(target=handle_client_recv, 
                                         args=[client_sock,addr],
                                         daemon=True)
-        sent_thread = threading.Thread(target=handle_client_send,
+        send_thread = threading.Thread(target=handle_client_send,
                                        args=[client_sock, q, addr],
                                        daemon=True)
         recv_thread.start()

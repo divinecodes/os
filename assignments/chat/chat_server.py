@@ -57,7 +57,7 @@ def recv_msgs(sock, data=bytes()):
         return received messages"""
     msgs = []
     while not msgs:
-        recvd = sock.recvd(4096)
+        recvd = sock.recv(4096)
         if not recvd: 
             raise ConnectionError
         data = data + recvd
